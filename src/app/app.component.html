@@ -1,0 +1,44 @@
+
+<div *ngIf="show && cards">
+  <div class="row justify-content-lg-center">
+    <div class="col-lg-4 ">
+      <div class="d-flex justify-content-center">
+        <div class="row">
+          <div class="col-3" *ngFor="let card of arrayTable[page-1]">
+            <img *ngIf="cards[card-1].image" [src]="cards[card-1].image" class="img-fluid" alt="Responsive image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row justify-content-lg-center">
+    <div class="col-lg-12 d-flex justify-content-center">
+      <ngb-pagination [collectionSize]="quantity" [(page)]="page" [pageSize]="1" aria-label="Default pagination"></ngb-pagination>
+    </div>
+  </div>
+  <div class="row justify-content-lg-center">
+    <div class="col-lg-12 d-flex justify-content-center">
+      <button type="button" class="btn btn-outline-dark" (click)="changeQuantity(content)" [disabled]="quantity<=0">Editar</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Loteria</h4>
+  </div>
+  <div class="modal-body">
+    <form autocomplete="off" #myForm="ngForm">
+      <div class="form-group">
+        <label for="quantity">¿Cuantas tablas quieres crear?</label>
+        <div class="input-group">
+          <input id="quantity" class="form-control" placeholder="Ingresa cantidad" name="quantity" [(ngModel)]="quantity" required>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="getAllCards()" [disabled]="quantity<=0">Aceptar</button>
+  </div>
+</ng-template>
